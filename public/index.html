@@ -1,15 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
-    <title>codelab</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CodeLab · Laboratorio personal de código y diseño</title>
+  <meta name="description" content="Cuaderno técnico de experimentos, apuntes y retos de desarrollo web, animación y diseño de interfaces.">
+  <meta name="theme-color" content="#0b0d0c">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- type="module" ya se ejecuta en diferido: no necesita defer -->
+  <script type="module" src="js/script.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-    <h1>codelab</h1>
-    <p>Servidor de experimentos funcionando correctamente.</p>
-<script src="js/script.js"></script>
+  <!-- Fondo decorativo: oculto a lectores de pantalla -->
+  <canvas class="dot-grid" data-dot-grid aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a class="brand" href="./">
+      <span class="brand__mark" aria-hidden="true">&gt;_</span>
+      CodeLab
+    </a>
+  </header>
+
+  <main id="contenido" class="page">
+    <section class="intro" aria-labelledby="intro-title">
+      <p class="eyebrow">// laboratorio personal</p>
+      <h1 id="intro-title" class="intro__title">Experimentos, apuntes y retos de código.</h1>
+      <p class="intro__lead">
+        Un cuaderno técnico para documentar lo que aprendo: desarrollo web, JavaScript,
+        animación con GSAP y diseño de interfaces.
+      </p>
+    </section>
+
+    <section class="modules" aria-labelledby="modulos-title">
+      <h2 id="modulos-title" class="section-label">Módulos</h2>
+
+      <ul class="card-grid" role="list">
+        <li>
+          <article class="card">
+            <p class="card__meta">
+              <span class="tag">Fundamentos</span>
+              <span>Reto 01</span>
+            </p>
+            <h3 class="card__title">Arranque profesional de un proyecto</h3>
+            <p class="card__desc">
+              Estructura base de index.html, reset de CSS con variables y comprobación
+              de que el JavaScript se está ejecutando.
+            </p>
+            <a class="card__link" href="apuntes/arranque-proyecto.html">
+              Acceder<span class="visually-hidden"> a Arranque profesional de un proyecto</span>
+              <span class="card__arrow" aria-hidden="true">→</span>
+            </a>
+          </article>
+        </li>
+      </ul>
+    </section>
+  </main>
 </body>
 </html>

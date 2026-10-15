@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reto 01 · Arranque profesional de un proyecto · CodeLab</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../">
+      <span class="brand__mark" aria-hidden="true">&gt;_</span>
+      CodeLab
+    </a>
+  </header>
+
+  <main class="page doc">
+    <a class="back-link" href="../">← Volver al inicio</a>
+
+    <p class="eyebrow" style="margin-top: var(--space-8)">// Reto 01 · Fundamentos</p>
+    <h1 class="intro__title">Arranque profesional de un proyecto</h1>
+    <p class="intro__lead">
+      Crear desde una carpeta vacía, sin copiar, la base de cualquier proyecto y comprobar que el JavaScript se ejecuta.
+      Repítelo hasta hacerlo en menos de 5 minutos.
+    </p>
+
+    <h2>Concepto</h2>
+    <ul>
+      <li><strong>Boilerplate</strong> — "estructura mínima que se repite en cada proyecto".</li>
+      <li><strong>Reset CSS</strong> — "anular los estilos por defecto del navegador para partir de cero".</li>
+      <li><strong>Custom properties</strong> — "variables de CSS": se declaran <code>--color-bg: #0b0d0c;</code> y se usan con <code>var(--color-bg)</code>.</li>
+      <li><strong><code>box-sizing: border-box</code></strong> — "el ancho incluye el padding y el borde".</li>
+      <li><strong><code>type="module"</code></strong> — "el archivo JS es un módulo: puede usar <code>import</code> y <code>export</code>".</li>
+      <li><strong><code>defer</code></strong> — "descarga el JS sin bloquear y lo ejecuta cuando el HTML ya está leído".</li>
+      <li><strong>DevTools / Consola</strong> — "herramientas del navegador" (F12). Ahí ves los <code>console.log</code> y los errores.</li>
+    </ul>
+
+    <h2>Prueba</h2>
+    <p>Ejemplo mínimo, incompleto a propósito. Resuelve los 4 huecos.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+  &lt;!-- 1. codificación de caracteres --&gt;
+  &lt;!-- 2. viewport para móvil --&gt;
+  &lt;title&gt;Mi proyecto&lt;/title&gt;
+  &lt;!-- 3. enlazar CSS --&gt;
+  &lt;!-- 4. enlazar JS como módulo --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Funciona&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <h2>Reto</h2>
+    <ol>
+      <li><code>index.html</code> con los 4 huecos resueltos y el <code>lang</code> correcto.</li>
+      <li><code>css/styles.css</code> con un bloque <code>:root</code> (mínimo 3 variables: fondo, texto, acento), el reset sobre <code>*</code>, <code>*::before</code> y <code>*::after</code>, y un <code>body</code> que use las variables.</li>
+      <li><code>js/script.js</code> que imprima en consola un mensaje que identifique el archivo.</li>
+      <li>Responde: ¿<code>type="module"</code> necesita <code>defer</code>? ¿Por qué?</li>
+    </ol>
+
+    <h2>Cómo comprobar que funciona</h2>
+    <ul>
+      <li>La consola muestra tu mensaje y ningún error en rojo.</li>
+      <li>El <code>h1</code> no tiene margen por defecto y el fondo usa tu variable.</li>
+      <li>En DevTools &gt; Elements, al seleccionar <code>body</code>, ves tus variables en <em>Computed</em>.</li>
+    </ul>
+
+    <h2>Pistas</h2>
+    <details>
+      <summary>Pista 1: el JS no carga o la consola habla de CORS</summary>
+      <p>Los módulos no funcionan abriendo el archivo con doble clic (<code>file://</code>). Necesitas un <strong>servidor local</strong> ("un mini servidor en tu equipo"). En este proyecto ya lo tienes: <code>compose.yml</code> sirve <code>public/</code> con nginx.</p>
+    </details>
+    <details>
+      <summary>Pista 2: el atributo que falta en el script</summary>
+      <p>Busca en MDN "script type module" y fíjate en cuándo se ejecuta cada tipo de script.</p>
+    </details>
+
+    <h2>Solución</h2>
+    <details>
+      <summary>Ábrela después de intentarlo</summary>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;Mi proyecto&lt;/title&gt;
+  &lt;link rel="stylesheet" href="css/styles.css"&gt;
+  &lt;script type="module" src="js/script.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Funciona&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<pre><code>:root {
+  --color-bg: #0b0d0c;
+  --color-text: #e6ebe8;
+  --color-accent: #3dff8b;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100dvh;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+}</code></pre>
+<pre><code>console.log('[mi-proyecto] script.js cargado');</code></pre>
+      <p><strong>Por qué así:</strong> los módulos ya se ejecutan en diferido, así que <code>defer</code> sobra con <code>type="module"</code>. Con un script clásico (sin <code>type="module"</code>) sí lo pondrías. El prefijo <code>[mi-proyecto]</code> te deja filtrar tus mensajes cuando la consola se llene.</p>
+    </details>
+
+    <h2>Variación</h2>
+    <p>Cuando lo domines: crea <code>js/utils.js</code> con <code>export function saludar(nombre) {}</code> e impórtalo desde <code>script.js</code>. Si funciona, entendiste los módulos.</p>
+  </main>
+</body>
+</html>
